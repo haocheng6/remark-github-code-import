@@ -13,7 +13,7 @@ const PLUGIN_NAME = 'remark-github-code-import';
 export type Options = {
   /**
    * Whether to dedent the extracted code. If true, the minimum number of leading
-   * white spaces at the beginning of all extracted lines will be removed from
+   * whitespaces at the beginning of all extracted lines will be removed from
    * each line.
    *
    * @default true

@@ -1,0 +1,54 @@
+{
+  "name": "remark-github-code-import",
+  "version": "0.0.0",
+  "description": "remark plugin that imports code from a GitHub URL",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "format": "prettier --check --write .",
+    "format:fail": "prettier --check .",
+    "lint": "eslint --cache .",
+    "build": "tsc"
+  },
+  "keywords": [
+    "unified",
+    "mdast",
+    "remark",
+    "remark-plugin",
+    "plugin",
+    "markdown",
+    "code-block"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
+  "author": {
+    "name": "Hao Cheng",
+    "email": "hcheng636@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haocheng6/remark-github-code-import"
+  },
+  "packageManager": "pnpm@8.12.1",
+  "devDependencies": {
+    "@types/mdast": "^4.0.3",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-import": "^2.29.1",
+    "prettier": "3.1.1",
+    "remark": "^15.0.1",
+    "typescript": "^5.3.3",
+    "unified": "^11.0.4"
+  },
+  "dependencies": {
+    "fenceparser": "^2.2.0",
+    "unist-util-visit": "^5.0.0"
+  }
+}

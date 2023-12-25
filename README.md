@@ -73,9 +73,9 @@ Would output the following:
 
 ```js reference
 if (value) {
-  if (attr === 'status' && Array.isArray(value) && value.length) {
+  if (attr === "status" && Array.isArray(value) && value.length) {
     fmOrdered[attr] = value.sort();
-  } else if (attr === 'browser-compat' || attr === 'spec-urls') {
+  } else if (attr === "browser-compat" || attr === "spec-urls") {
     if (Array.isArray(value) && value.length === 1) {
       fmOrdered[attr] = value[0];
     } else {

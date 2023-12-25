@@ -1,6 +1,6 @@
 {
   "name": "remark-github-code-import",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "remark plugin that imports code from a GitHub URL",
   "type": "module",
   "exports": "./dist/index.js",

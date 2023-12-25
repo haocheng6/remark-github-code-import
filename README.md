@@ -48,6 +48,10 @@ https://github.com/mdn/content/blob/83f3bb0c0663edf3c4f86da8a07d8ac0a75b5ccb/scr
 ```
 ````
 
+> [!TIP]
+> The line number range at the end of the URL is optional. When no range is
+> specified, the content of the entire file will be used.
+
 ### Using the Default Configuration
 
 Running the following JavaScript:

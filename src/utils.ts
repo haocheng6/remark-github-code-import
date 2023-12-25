@@ -15,7 +15,7 @@ export async function readCode(
   let [fromLine, toLine] = range
     .split('-')
     .map((line) => (line !== undefined ? Number(line.slice(1)) : undefined));
-  fromLine ??= 0;
+  fromLine ||= 1;
   toLine ??= Infinity;
 
   if (
@@ -24,9 +24,7 @@ export async function readCode(
     isNaN(fromLine) ||
     isNaN(toLine)
   ) {
-    throw new Error(
-      `URL does not have a valid line range: ${range || 'no range given'}.`,
-    );
+    throw new Error(`URL does not have a valid line range: ${range}.`);
   }
 
   const [, user, repo, , ...path] = url.pathname.split('/');

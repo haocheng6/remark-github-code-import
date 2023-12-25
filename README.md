@@ -90,6 +90,7 @@ if (value) {
 <div class="github-code-link"><a href=https://github.com/mdn/content/blob/83f3bb0c0663edf3c4f86da8a07d8ac0a75b5ccb/scripts/front-matter_utils.js#L68-L80 target="_blank">See full example on GitHub</a></div>
 
 </div>
+
 ````
 
 ### Setting `dedentCode` to `false`
@@ -116,24 +117,25 @@ Would output the following:
 <div class="imported-github-code">
 
 ```js reference
-if (value) {
-  if (attr === 'status' && Array.isArray(value) && value.length) {
-    fmOrdered[attr] = value.sort();
-  } else if (attr === 'browser-compat' || attr === 'spec-urls') {
-    if (Array.isArray(value) && value.length === 1) {
-      fmOrdered[attr] = value[0];
-    } else {
-      fmOrdered[attr] = value;
-    }
-  } else {
-    fmOrdered[attr] = value;
-  }
-}
+      if (value) {
+        if (attr === "status" && Array.isArray(value) && value.length) {
+          fmOrdered[attr] = value.sort();
+        } else if (attr === "browser-compat" || attr === "spec-urls") {
+          if (Array.isArray(value) && value.length === 1) {
+            fmOrdered[attr] = value[0];
+          } else {
+            fmOrdered[attr] = value;
+          }
+        } else {
+          fmOrdered[attr] = value;
+        }
+      }
 ```
 
 <div class="github-code-link"><a href=https://github.com/mdn/content/blob/83f3bb0c0663edf3c4f86da8a07d8ac0a75b5ccb/scripts/front-matter_utils.js#L68-L80 target="_blank">See full example on GitHub</a></div>
 
 </div>
+
 ````
 
 [1]: https://github.com/unifiedjs/unified

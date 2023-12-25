@@ -34,7 +34,8 @@ export async function readCode(
 
   if (response.ok) {
     const code = await response.text();
-    const lines = code.split('\n');
+    const trimmedCode = code.at(-1) === '\n' ? code.slice(0, -1) : code;
+    const lines = trimmedCode.split('\n');
     const extractedLines = lines.slice(fromLine - 1, toLine);
     const processedLines = dedentCode ? dedent(extractedLines) : extractedLines;
 

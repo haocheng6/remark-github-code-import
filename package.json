@@ -9,7 +9,8 @@
     "format": "prettier --check --write .",
     "format:fail": "prettier --check .",
     "lint": "eslint --cache .",
-    "build": "tsc"
+    "test": "vitest",
+    "build": "tsc --project tsconfig.build.json"
   },
   "keywords": [
     "unified",
@@ -38,14 +39,18 @@
   "packageManager": "pnpm@8.12.1",
   "devDependencies": {
     "@types/mdast": "^4.0.3",
+    "@types/node": "^20.10.5",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.15.0",
     "eslint": "^8.56.0",
     "eslint-plugin-import": "^2.29.1",
+    "jsdom": "^23.0.1",
     "prettier": "3.1.1",
     "remark": "^15.0.1",
+    "to-vfile": "^8.0.0",
     "typescript": "^5.3.3",
-    "unified": "^11.0.4"
+    "unified": "^11.0.4",
+    "vitest": "^1.1.0"
   },
   "dependencies": {
     "fenceparser": "^2.2.0",

@@ -21,8 +21,10 @@ export type Options = {
   dedentCode?: boolean;
 };
 
-const remarkGithubCodeImport: Plugin<[options: Options], Root> = (
+const remarkGithubCodeImport: Plugin<[options: Options] | void[], Root> = (
   { dedentCode = true } = {} as Options,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  ..._ignored
 ) => {
   return async (tree, file) => {
     const references: Array<[node: Code, url: string]> = [];

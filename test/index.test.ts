@@ -15,9 +15,7 @@ describe('remarkGithubCodeImport', () => {
   });
 
   it('imports an entire file when the URL in the reference code block does not specify a line range', async () => {
-    const processor = remark().use(remarkGithubCodeImport, {
-      dedentCode: true,
-    });
+    const processor = remark().use(remarkGithubCodeImport);
     const markdown = await getFixtureVFile('input/entire_file.md');
 
     expect(String(await processor.process(markdown))).toMatchFileSnapshot(
@@ -26,9 +24,7 @@ describe('remarkGithubCodeImport', () => {
   });
 
   it('imports code from the specified line range when the URL in the reference code block specifies a line range', async () => {
-    const processor = remark().use(remarkGithubCodeImport, {
-      dedentCode: true,
-    });
+    const processor = remark().use(remarkGithubCodeImport);
     const markdown = await getFixtureVFile('input/line_range.md');
 
     expect(String(await processor.process(markdown))).toMatchFileSnapshot(

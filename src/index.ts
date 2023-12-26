@@ -55,7 +55,7 @@ const remarkGithubCodeImport: Plugin<[options: Options] | void[], Root> = (
         node,
         {
           type: 'html',
-          value: `<div class="github-code-link"><a href=${url} target="_blank">See full example on GitHub</a></div>`,
+          value: `<div class="github-code-link"><a href="${url}" target="_blank">See full example on GitHub</a></div>`,
         } satisfies Html,
         {
           type: 'html',

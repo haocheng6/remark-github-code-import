@@ -18,6 +18,6 @@ export function once(fn) {
 }
 ```
 
-<div class="github-code-link"><a href=https://github.com/user/repo/blob/branch/folder/example.js target="_blank">See full example on GitHub</a></div>
+<div class="github-code-link"><a href="https://github.com/user/repo/blob/branch/folder/example.js" target="_blank">See full example on GitHub</a></div>
 
 </div>

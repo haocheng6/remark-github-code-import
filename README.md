@@ -44,13 +44,15 @@ Suppose we have the following Markdown file `example.md`:
 # Example
 
 ```js reference
-https://github.com/mdn/content/blob/83f3bb0c0663edf3c4f86da8a07d8ac0a75b5ccb/scripts/front-matter_utils.js#L68-L80
+https://github.com/haocheng6/remark-github-code-import/blob/53802a344076676ef068e236285306f8cee086ba/src/utils.ts#L43-L49
 ```
 ````
 
 > [!TIP]
 > The line number range at the end of the URL is optional. When no range is
-> specified, the content of the entire file will be used.
+> specified, the content of the entire file will be imported.
+> 
+> You can also specify a single line like `https://github.com/haocheng6/remark-github-code-import/blob/53802a344076676ef068e236285306f8cee086ba/src/utils.ts#L43`.
 
 ### Using the Default Configuration
 
@@ -76,22 +78,16 @@ Would output the following:
 <div class="imported-github-code">
 
 ```js reference
-if (value) {
-  if (attr === "status" && Array.isArray(value) && value.length) {
-    fmOrdered[attr] = value.sort();
-  } else if (attr === "browser-compat" || attr === "spec-urls") {
-    if (Array.isArray(value) && value.length === 1) {
-      fmOrdered[attr] = value[0];
-    } else {
-      fmOrdered[attr] = value;
-    }
-  } else {
-    fmOrdered[attr] = value;
-  }
+if (range === undefined) {
+  [fromLine, toLine] = [1, Infinity];
+} else if (typeof range === 'number') {
+  [fromLine, toLine] = [range, range];
+} else {
+  [fromLine, toLine] = range;
 }
 ```
 
-<div class="github-code-link"><a href=https://github.com/mdn/content/blob/83f3bb0c0663edf3c4f86da8a07d8ac0a75b5ccb/scripts/front-matter_utils.js#L68-L80 target="_blank">See full example on GitHub</a></div>
+<div class="github-code-link"><a href=https://github.com/haocheng6/remark-github-code-import/blob/53802a344076676ef068e236285306f8cee086ba/src/utils.ts#L43-L49 target="_blank">See full example on GitHub</a></div>
 
 </div>
 
@@ -121,22 +117,16 @@ Would output the following:
 <div class="imported-github-code">
 
 ```js reference
-      if (value) {
-        if (attr === "status" && Array.isArray(value) && value.length) {
-          fmOrdered[attr] = value.sort();
-        } else if (attr === "browser-compat" || attr === "spec-urls") {
-          if (Array.isArray(value) && value.length === 1) {
-            fmOrdered[attr] = value[0];
-          } else {
-            fmOrdered[attr] = value;
-          }
-        } else {
-          fmOrdered[attr] = value;
-        }
-      }
+  if (range === undefined) {
+    [fromLine, toLine] = [1, Infinity];
+  } else if (typeof range === 'number') {
+    [fromLine, toLine] = [range, range];
+  } else {
+    [fromLine, toLine] = range;
+  }
 ```
 
-<div class="github-code-link"><a href=https://github.com/mdn/content/blob/83f3bb0c0663edf3c4f86da8a07d8ac0a75b5ccb/scripts/front-matter_utils.js#L68-L80 target="_blank">See full example on GitHub</a></div>
+<div class="github-code-link"><a href=https://github.com/haocheng6/remark-github-code-import/blob/53802a344076676ef068e236285306f8cee086ba/src/utils.ts#L43-L49 target="_blank">See full example on GitHub</a></div>
 
 </div>
 

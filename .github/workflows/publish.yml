@@ -11,14 +11,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: pnpm
           registry-url: https://registry.npmjs.org
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
       - name: Install Dependencies
         run: pnpm i --frozen-lockfile
       - name: Build

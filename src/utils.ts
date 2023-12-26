@@ -1,8 +1,33 @@
 import parse from 'fenceparser';
 
+const lineRangeRegex = /^L(\d+)(?:-L(\d+))?$/;
+
 export function isCodeReference(meta: string): boolean {
   // @ts-expect-error: the library definition is wrong.
   return parse(meta).reference === true;
+}
+
+export function parseLineRange(
+  range: string,
+): undefined | number | [number, number] {
+  if (!range) {
+    return undefined;
+  }
+
+  const match = range.match(lineRangeRegex);
+  if (match === null) {
+    throw new Error(`Invalid line range: ${range}.`);
+  }
+
+  const fromLineStr = match[1];
+  const toLineStr = match[2];
+  const fromLine = Number(fromLineStr);
+  const toLine = Number(toLineStr);
+
+  if (toLineStr === undefined) {
+    return fromLine;
+  }
+  return [fromLine, toLine];
 }
 
 export async function readCode(
@@ -11,20 +36,16 @@ export async function readCode(
 ): Promise<string> {
   const url = new URL(referenceUrl);
 
-  const range = url.hash.slice(1);
-  let [fromLine, toLine] = range
-    .split('-')
-    .map((line) => (line !== undefined ? Number(line.slice(1)) : undefined));
-  fromLine ||= 1;
-  toLine ??= Infinity;
+  const range = parseLineRange(url.hash.slice(1));
+  let fromLine: number;
+  let toLine: number;
 
-  if (
-    fromLine === undefined ||
-    toLine === undefined ||
-    isNaN(fromLine) ||
-    isNaN(toLine)
-  ) {
-    throw new Error(`URL does not have a valid line range: ${range}.`);
+  if (range === undefined) {
+    [fromLine, toLine] = [1, Infinity];
+  } else if (typeof range === 'number') {
+    [fromLine, toLine] = [range, range];
+  } else {
+    [fromLine, toLine] = range;
   }
 
   const [, user, repo, , ...path] = url.pathname.split('/');

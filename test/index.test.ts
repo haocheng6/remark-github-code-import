@@ -32,6 +32,15 @@ describe('remarkGithubCodeImport', () => {
     );
   });
 
+  it('imports code from the specified line when the URL in the reference code block specifies a line', async () => {
+    const processor = remark().use(remarkGithubCodeImport);
+    const markdown = await getFixtureVFile('input/single_line.md');
+
+    expect(String(await processor.process(markdown))).toMatchFileSnapshot(
+      './fixtures/output/single_line_dedented.md',
+    );
+  });
+
   it('does not dedent the imported code when the `dedentCode` options is false', async () => {
     const processor = remark().use(remarkGithubCodeImport, {
       dedentCode: false,

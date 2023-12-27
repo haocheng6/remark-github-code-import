@@ -81,7 +81,7 @@ describe('readCode', () => {
   const mockUrl = 'https://github.com/user/repo/blob/branch/folder/example.js';
 
   beforeEach(() => {
-    vi.spyOn(window, 'fetch').mockImplementation(async () => {
+    vi.spyOn(global, 'fetch').mockImplementation(async () => {
       return { text: async () => mockCode, ok: true } as Response;
     });
   });
@@ -122,6 +122,24 @@ describe('readCode', () => {
     it('reads code from the specified line range when a single line is given', async () => {
       expect(await readCode(`${mockUrl}#L8`, true)).toMatchFileSnapshot(
         './fixtures/output/example_single_line_dedented.js',
+      );
+    });
+  });
+
+  describe('error handling', () => {
+    it('throws an error if an invalid line range is given', async () => {
+      await expect(() => readCode(`${mockUrl}#L6X`)).rejects.toThrowError(
+        'Invalid line range: L6X.',
+      );
+    });
+
+    it('throws an error if the fetch call failed', async () => {
+      vi.spyOn(global, 'fetch').mockImplementation(async () => {
+        return { text: async () => '404: Not Found', ok: false } as Response;
+      });
+
+      await expect(() => readCode(mockUrl)).rejects.toThrowError(
+        'Failed to fetch code: 404: Not Found',
       );
     });
   });

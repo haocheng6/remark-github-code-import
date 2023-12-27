@@ -63,7 +63,7 @@ export async function readCode(
     return processedLines.join('\n');
   }
 
-  throw new Error(`Failed to fetch code: ${response.text()}`);
+  throw new Error(`Failed to fetch code: ${await response.text()}`);
 }
 
 export function dedent(lines: string[]): string[] {

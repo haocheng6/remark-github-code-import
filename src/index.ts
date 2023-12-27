@@ -1,3 +1,4 @@
+import { stringifyPosition } from 'unist-util-stringify-position';
 import { visit } from 'unist-util-visit';
 
 import { isCodeReference, readCode } from './utils.js';
@@ -38,8 +39,15 @@ const remarkGithubCodeImport: Plugin<[options: Options] | void[], Root> = (
       }
 
       const url = node.value.trim().split('\n')[0];
-      if (url === undefined) {
-        file.message('No URL found in the code block.', node, PLUGIN_NAME);
+      if (!url) {
+        const position = stringifyPosition(node.position);
+        file.fail(
+          `[${file.basename}${
+            position ? ':' + position : ''
+          }] No URL found in the code block.`,
+          node,
+          PLUGIN_NAME,
+        );
         return;
       }
 
@@ -70,9 +78,12 @@ const remarkGithubCodeImport: Plugin<[options: Options] | void[], Root> = (
       try {
         node.value = await readCode(url, dedentCode);
       } catch (error) {
+        const position = stringifyPosition(node.position);
         const errorMessage = error instanceof Error ? error.message : undefined;
-        file.message(
-          `Failed to import code from ${url}${
+        file.fail(
+          `[${file.basename}${
+            position ? ':' + position : ''
+          }] Failed to import code from ${url}${
             errorMessage !== undefined ? ': ' + errorMessage : ''
           }`,
           node,

@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "fenceparser": "^2.2.0",
+    "unist-util-stringify-position": "^4.0.0",
     "unist-util-visit": "^5.0.0"
   }
 }

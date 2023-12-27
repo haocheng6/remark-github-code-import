@@ -66,9 +66,9 @@ export async function readCode(
   throw new Error(`Failed to fetch code: ${response.text()}`);
 }
 
-function dedent(lines: string[]): string[] {
+export function dedent(lines: string[]): string[] {
   const minWhiteSpaces = Math.min(
-    ...lines.map((line) => {
+    ...lines.filter(Boolean).map((line) => {
       let count = 0;
       for (const c of line) {
         if (c === ' ' || c === '\t') {

@@ -1,6 +1,11 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { isCodeReference, parseLineRange, readCode } from '../src/utils.js';
+import {
+  dedent,
+  isCodeReference,
+  parseLineRange,
+  readCode,
+} from '../src/utils.js';
 
 import { getFixtureString } from './helpers.js';
 
@@ -119,5 +124,73 @@ describe('readCode', () => {
         './fixtures/output/example_single_line_dedented.js',
       );
     });
+  });
+});
+
+describe('dedent', () => {
+  it('does nothing when the given lines do not contain any leading whitespaces', () => {
+    const lines = [
+      'console.log("hello world!");',
+      'console.log("hello world!");',
+      'console.log("hello world!");',
+    ];
+
+    expect(dedent(lines)).toStrictEqual(lines);
+  });
+
+  it('removes leading spaces', () => {
+    const lines = [
+      '    console.log("hello world!");',
+      '    console.log("hello world!");',
+      '    console.log("hello world!");',
+    ];
+
+    expect(dedent(lines)).toStrictEqual([
+      'console.log("hello world!");',
+      'console.log("hello world!");',
+      'console.log("hello world!");',
+    ]);
+  });
+
+  it('removes leading tabs', () => {
+    const lines = [
+      '\tconsole.log("hello world!");',
+      '\tconsole.log("hello world!");',
+      '\tconsole.log("hello world!");',
+    ];
+
+    expect(dedent(lines)).toStrictEqual([
+      'console.log("hello world!");',
+      'console.log("hello world!");',
+      'console.log("hello world!");',
+    ]);
+  });
+
+  it('ignores blank lines', () => {
+    const lines = [
+      '    console.log("hello world!");',
+      '', // blank line
+      '    console.log("hello world!");',
+      '', // blank line
+      '    console.log("hello world!");',
+    ];
+
+    expect(dedent(lines)).toStrictEqual([
+      'console.log("hello world!");',
+      '',
+      'console.log("hello world!");',
+      '',
+      'console.log("hello world!");',
+    ]);
+  });
+
+  it('works when the given lines are all blank', () => {
+    const lines = [
+      '', // blank line
+      '', // blank line
+      '', // blank line
+    ];
+
+    expect(dedent(lines)).toStrictEqual(lines);
   });
 });

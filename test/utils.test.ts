@@ -10,7 +10,7 @@ import {
 import { getFixtureString } from './helpers.js';
 
 describe('isCodeReference', () => {
-  it.each(['', 'random'])(
+  it.each(['', 'random', '[index.js]'])(
     'returns false when the given meta string does not contain "reference"',
     (input) => {
       expect(isCodeReference(input)).toBe(false);
@@ -33,6 +33,7 @@ describe('isCodeReference', () => {
     'reference',
     'reference title="code title"',
     'title="code title" reference',
+    '[index.js] reference',
   ])(
     'returns true when the given meta string contains the "reference" property',
     (input) => {

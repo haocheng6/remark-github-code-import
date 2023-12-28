@@ -3,8 +3,12 @@ import parse from 'fenceparser';
 const lineRangeRegex = /^L(\d+)(?:-L(\d+))?$/;
 
 export function isCodeReference(meta: string): boolean {
-  // @ts-expect-error: the library definition is wrong.
-  return parse(meta).reference === true;
+  try {
+    // @ts-expect-error: the library definition is wrong.
+    return parse(meta).reference === true;
+  } catch {
+    return meta.endsWith(' reference');
+  }
 }
 
 export function parseLineRange(
